@@ -1,0 +1,46 @@
+###################################################
+# Syntax Coloring Map For ST7920_I2C_MCP23017_GLCD 
+###################################################
+
+###################################################
+# Datatypes (KEYWORD1)
+###################################################
+
+ST7920_I2C_MCP23017_GLCD 	KEYWORD1	ST7920_I2C_MCP23017_GLCD 
+
+###################################################
+# Methods and Functions (KEYWORD2)
+###################################################
+
+GLCD						KEYWORD2
+init_display				KEYWORD2
+set_inverse					KEYWORD2
+set_rotate_180				KEYWORD2
+goto_x_y					KEYWORD2
+draw_pixel					KEYWORD2
+clear_pixel					KEYWORD2
+write_number_x_y			KEYWORD2
+write_lnumber_x_y			KEYWORD2
+write_char					KEYWORD2
+write_char_x_y				KEYWORD2
+write_gnumber_x_y			KEYWORD2
+clear_screen				KEYWORD2
+set_cursour					KEYWORD2
+write_string				KEYWORD2
+draw_line					KEYWORD2
+draw_frame					KEYWORD2
+draw_box					KEYWORD2
+draw_circle					KEYWORD2
+draw_filled_circle			KEYWORD2
+draw_ellipse				KEYWORD2
+draw_filled_ellipse			KEYWORD2
+draw_triangle				KEYWORD2
+draw_filled_triangle		KEYWORD2
+draw_rounded_frame			KEYWORD2
+draw_filled_rounded_box		KEYWORD2
+draw_bitmap					KEYWORD2
+
+###################################################
+# Constants (LITERAL1)
+###################################################
+
