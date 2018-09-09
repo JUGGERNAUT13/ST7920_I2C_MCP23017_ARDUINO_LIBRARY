@@ -1096,7 +1096,7 @@ void ST7920_I2C_MCP23017_GLCD::draw_bitmap(const uint16_t bitmap[], int w, int h
 			if(rotated == true) {
 				j = (x * (-1) + 7);
 				k = (y * (-1) + 63);
-				value = reverse_bits((uint16_t) bitmap[y + x + m]);
+				value = reverse_bits((uint16_t) pgm_read_word(&bitmap[y + x + m]));
 			} else {
 				j = x;
 				k = y;
