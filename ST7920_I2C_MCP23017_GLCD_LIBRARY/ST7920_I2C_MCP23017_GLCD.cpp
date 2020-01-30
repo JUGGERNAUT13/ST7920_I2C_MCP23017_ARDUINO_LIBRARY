@@ -4,7 +4,7 @@
 
 ST7920_I2C_MCP23017_GLCD::GLCD() {}
 	
-void ST7920_I2C_MCP23017_GLCD::init_display(const byte port, const byte i2cAddress) {
+void ST7920_I2C_MCP23017_GLCD::init_display(const byte port, const byte i2cAddress) { 
 	_port = port;   				// remember port
 	i2caddr = i2cAddress;			// remember device address
 	Wire.begin(i2caddr);
@@ -1181,13 +1181,14 @@ void ST7920_I2C_MCP23017_GLCD::clear_pixel(uint8_t x, uint8_t y) {
 		x1 = (x1 * (-1) + 127);
 		y1 = (y1 * (-1) + 63);
 	}
-	uint16_t temp;
+	uint16_t temp, temp1;
 	uint16_t dot = 0x7FFF;    			// this will be rotated into it's correct position in the word
 	x_wd = x1 / 16;        				// find address of word with our pixel (x; 0-7)
 	x_pixel = x1 - (x_wd * 16);        	// get the modulo remainder; that's our pixel's position in the word
 	goto_x_y(x_wd, y1);
 	temp = read_word(1);    			// read word from screen at that position
-	temp = (temp & (dot >> x_pixel));   // convert x_pixel into a bit position, 0-16
+	temp1 = ((0xFFFF >> (16 - x_pixel)) << (16 - x_pixel));
+	temp = (temp & (temp1 | (dot >> x_pixel)));   // convert x_pixel into a bit position, 0-16
 	write_word(x_wd, y1, temp);
 }
 

@@ -1,6 +1,6 @@
 #include <ST7920_I2C_MCP23017_GLCD.h>
 
-ST7920_I2C_MCP23017_GLCD glcd;
+ST7920_I2C_MCP23017_GLCD GLCD;
 
 static const uint16_t PROGMEM demo_bitmap[] = {
   0xFFFF, 0xFFE0, 0x07FF, 0xFF00, 0x1FFF, 0xFC3F, 0xFC00, 0x3FFF,
@@ -70,60 +70,70 @@ static const uint16_t PROGMEM demo_bitmap[] = {
 }; 
 
 void setup() {
-  glcd.set_inverse(true);
-  glcd.set_rotate_180(true);
-  glcd.init_display();
+  //GLCD.set_inverse(true);
+  GLCD.set_rotate_180(true);
+  GLCD.init_display();
 }
 
 void loop() {
-  glcd.draw_line(0, 0, 127, 63);
-  glcd.draw_line(127, 0, 0, 63);
-  delay(15000);
-  glcd.clear_screen();
-  glcd.draw_triangle(32, 1, 1, 62, 62, 62);
-  glcd.draw_filled_triangle(96, 1, 65, 62, 126, 62);
-  delay(15000);
-  glcd.clear_screen();
-  glcd.draw_frame(1, 1, 62, 62);
-  glcd.draw_box(65, 1, 62, 62);
-  delay(15000);
-  glcd.clear_screen();
-  glcd.draw_rounded_frame(1, 1, 62, 62, 10);
-  glcd.draw_filled_rounded_box(65, 1, 62, 62, 10);
-  delay(15000);
-  glcd.clear_screen();
-  glcd.draw_circle(32, 32, 31);
-  glcd.draw_filled_circle(96, 32, 31);
-  delay(15000);
-  glcd.clear_screen();
-  glcd.draw_ellipse(32, 16, 62, 30);
-  glcd.draw_filled_ellipse(96, 48, 62, 30);
-  delay(15000);
-  glcd.clear_screen();
-  glcd.write_string("Hello World) Not to try make long string");
-  ///glcd.set_cursour(20, 1);
-  glcd.write_string("Сообщение на русском");
-  delay(15000);
-  glcd.clear_screen();
-  draw_plot();
-  delay(15000);
-  glcd.clear_screen();
-  glcd.draw_bitmap(demo_bitmap, 128, 64);
-  delay(15000);
-  glcd.clear_screen();
+  int wait = 15000;
+  bool inversed;
+  for(int i = 0; i < 2; i++) {
+    if(i == 0) {
+      inversed = false;
+    } else {
+      inversed = true;
+    }
+    GLCD.set_inverse(inversed);
+    GLCD.clear_screen();
+    GLCD.draw_line(0, 0, 127, 63);
+    GLCD.draw_line(127, 0, 0, 63);
+    delay(wait);
+    GLCD.clear_screen();
+    GLCD.draw_triangle(32, 1, 1, 62, 62, 62);
+    GLCD.draw_filled_triangle(96, 1, 65, 62, 126, 62);
+    delay(wait);
+    GLCD.clear_screen();
+    GLCD.draw_frame(1, 1, 62, 62);
+    GLCD.draw_box(65, 1, 62, 62);
+    delay(wait);
+    GLCD.clear_screen();
+    GLCD.draw_rounded_frame(1, 1, 62, 62, 10);
+    GLCD.draw_filled_rounded_box(65, 1, 62, 62, 10);
+    delay(wait);
+    GLCD.clear_screen();
+    GLCD.draw_circle(32, 32, 31);
+    GLCD.draw_filled_circle(96, 32, 31);
+    delay(wait);
+    GLCD.clear_screen();
+    GLCD.draw_ellipse(32, 16, 62, 30);
+    GLCD.draw_filled_ellipse(96, 48, 62, 30);
+    delay(wait);
+    GLCD.clear_screen();
+    GLCD.write_string("Hello World) Not to try make long string");
+    ///glcd.set_cursour(20, 1);
+    GLCD.write_string("Сообщение на русском");
+    delay(wait);
+    GLCD.clear_screen();
+    draw_plot();
+    delay(wait);
+    GLCD.clear_screen();
+    GLCD.draw_bitmap(demo_bitmap, 128, 64);
+    delay(wait);
+  }
 }
 
 void draw_plot() {
-  glcd.write_char_x_y(4, 59, 0);
-  glcd.write_gnumber_x_y(113, 59, 100);
-  glcd.write_char_x_y(0, 0, 9);
-  glcd.write_char_x_y(0, 53, 0);
-  glcd.draw_line(4, 57, 128, 57);
-  glcd.draw_line(4, 0, 4, 57);
+  GLCD.write_char_x_y(4, 59, 0);
+  GLCD.write_gnumber_x_y(113, 59, 100);
+  GLCD.write_char_x_y(0, 0, 9);
+  GLCD.write_char_x_y(0, 53, 0);
+  GLCD.draw_line(4, 57, 128, 57);
+  GLCD.draw_line(4, 0, 4, 57);
   int k = 32;
   for (int i = 5; i < 128; i++) {
     int j = rand() % 3;
-    glcd.draw_pixel(i, k);
+    GLCD.draw_pixel(i, k);
     if (j == 1) {
       k--;
     }
